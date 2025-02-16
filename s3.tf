@@ -55,34 +55,20 @@ resource "aws_s3_bucket_logging" "site" {
   depends_on = [aws_s3_bucket.logging]
 }
 
-# Upload a test page (if enabled)
-resource "aws_s3_object" "index" {
-  count        = var.upload_index ? 1 : 0
-  bucket       = aws_s3_bucket.site.id
-  key          = "index.html"
-  source       = "${path.module}/files/index.html"
-  content_type = "text/html"
-  etag         = filemd5("${path.module}/files/index.html")
+# Upload all files from a local directory to S3
+# Adjust "path/to/your/directory" to the directory you want to upload
+locals {
+  source_directory = var.upload_dir
+  files            = fileset(local.source_directory, "**")
 }
 
-# Upload a robots.txt file (if enabled)
-resource "aws_s3_object" "robots" {
-  count        = var.upload_robots ? 1 : 0
-  bucket       = aws_s3_bucket.site.id
-  key          = "robots.txt"
-  source       = "${path.module}/files/robots.txt"
-  content_type = "text/plain"
-  etag         = filemd5("${path.module}/files/robots.txt")
-}
+resource "aws_s3_object" "files" {
+  for_each = { for file in local.files : file => file }
 
-# Upload a 404 file (if enabled)
-resource "aws_s3_object" "_404" {
-  count        = var.upload_404 ? 1 : 0
-  bucket       = aws_s3_bucket.site.id
-  key          = "404.html"
-  source       = "${path.module}/files/404.html"
-  content_type = "text/html"
-  etag         = filemd5("${path.module}/files/404.html")
+  bucket = aws_s3_bucket.site.id
+  key    = each.value # The key is the relative file path in the bucket
+  source = "${local.source_directory}/${each.value}" # The source file path
+  etag   = filemd5("${local.source_directory}/${each.value}") # Optional, ensures file consistency
 }
 
 ########################################

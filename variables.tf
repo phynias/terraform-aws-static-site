@@ -133,20 +133,8 @@ variable "iam_policy_site_updating" {
   type        = bool
 }
 
-variable "upload_index" {
-  default     = true
-  description = "To push a test `index.html` page or not"
-  type        = bool
-}
-
-variable "upload_robots" {
+variable "upload_dir" {
   default     = false
-  description = "To push a restrictive `robots.txt` file (useful if you don't want a site to be indexed) or not"
-  type        = bool
-}
-
-variable "upload_404" {
-  default     = false
-  description = "To push a `404.html` page (useful if you want to test your custom error responses) or not"
-  type        = bool
+  description = "Upload the contents of this directory to S3"
+  type        = string
 }
