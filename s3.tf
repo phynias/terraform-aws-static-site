@@ -65,7 +65,6 @@ locals {
     "html" = "text/html"
     "css"  = "text/css"
     "csv"  = "text/csv"
-    "js"   = "text/javascript"
     "txt"  = "text/plain"
     "xml"  = "text/xml"
     "jpg"  = "image/jpeg"
