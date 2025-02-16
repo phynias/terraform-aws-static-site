@@ -145,9 +145,7 @@ No modules.
 | [aws_s3_bucket_server_side_encryption_configuration.site](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [aws_s3_bucket_versioning.logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
 | [aws_s3_bucket_versioning.site](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
-| [aws_s3_object._404](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
-| [aws_s3_object.index](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
-| [aws_s3_object.robots](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
+| [aws_s3_object.files](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
 | [aws_route53_zone.site](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
@@ -173,9 +171,7 @@ No modules.
 | <a name="input_cloudfront_viewer_protocol_policy"></a> [cloudfront\_viewer\_protocol\_policy](#input\_cloudfront\_viewer\_protocol\_policy) | The [CloudFront viewer protocol policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) to enforce (e.g., redirect HTTP to HTTPS) | `string` | `"redirect-to-https"` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain name of the site and **MUST** match the Route53 hosted zone name (e.g., `domain.com`) | `string` | n/a | yes |
 | <a name="input_iam_policy_site_updating"></a> [iam\_policy\_site\_updating](#input\_iam\_policy\_site\_updating) | Optional IAM policy that provides permissions needed to update a static site (e.g., create CloudFront cache invalidation, update objects in S3, etc...) | `bool` | `false` | no |
-| <a name="input_upload_404"></a> [upload\_404](#input\_upload\_404) | To push a `404.html` page (useful if you want to test your custom error responses) or not | `bool` | `false` | no |
-| <a name="input_upload_index"></a> [upload\_index](#input\_upload\_index) | To push a test `index.html` page or not | `bool` | `true` | no |
-| <a name="input_upload_robots"></a> [upload\_robots](#input\_upload\_robots) | To push a restrictive `robots.txt` file (useful if you don't want a site to be indexed) or not | `bool` | `false` | no |
+| <a name="input_upload_dir"></a> [upload\_dir](#input\_upload\_dir) | Upload the contents of this directory to S3 | `string` | `false` | no |
 
 ## Outputs
 
