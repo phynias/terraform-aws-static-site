@@ -81,7 +81,7 @@ resource "aws_s3_object" "files" {
   bucket = aws_s3_bucket.site.id
   key    = each.value # The key is the relative file path in the bucket
   source = "${local.source_directory}/${each.value}" # The source file path
-  content_type = lookup("${local.source_directory}/${each.value}", "binary/octet-stream")
+  content_type = lookup(local.content_type_map, reverse(split(".", each.value))[0], "binary/octet-stream")
   etag   = filemd5("${local.source_directory}/${each.value}") # Optional, ensures file consistency
 }
 
