@@ -60,6 +60,19 @@ resource "aws_s3_bucket_logging" "site" {
 locals {
   source_directory = var.upload_dir
   files            = fileset(local.source_directory, "**")
+  content_type_map = {
+   "js" = "application/json"
+   "html" = "text/html"
+   "css"  = "text/css"
+   "csv" =  "text/csv"
+   "js" =  "text/javascript"
+   "txt" = "text/plain"
+   "xml" = "text/xml"
+   "jpg" = "image/jpeg"
+   "jepg" = "image/jpeg"
+   "gif" = "image/gif"
+   "png" = "image/png"
+  }
 }
 
 resource "aws_s3_object" "files" {
@@ -68,7 +81,7 @@ resource "aws_s3_object" "files" {
   bucket = aws_s3_bucket.site.id
   key    = each.value # The key is the relative file path in the bucket
   source = "${local.source_directory}/${each.value}" # The source file path
-  content_type = "text/html"
+  content_type = lookup("${local.source_directory}/${each.value}", "binary/octet-stream")
   etag   = filemd5("${local.source_directory}/${each.value}") # Optional, ensures file consistency
 }
 
