@@ -156,7 +156,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "logging" {
     id     = "move_files_to_IA"
     status = "Enabled"
     transition {
-      days          = 30
+      days          = var.move_files_to_IA_days
       storage_class = "STANDARD_IA"
     }
   }
@@ -165,7 +165,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "logging" {
     id     = "prune_old_files"
     status = "Enabled"
     expiration {
-      days = 365
+      days = var.prune_old_files_days
     }
   }
 }
