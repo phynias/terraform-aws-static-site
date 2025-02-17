@@ -16,24 +16,6 @@ variable "cloudfront_compress" {
   type        = bool
 }
 
-variable "cloudfront_custom_error_responses" {
-  default = [
-    {
-      error_code            = 404
-      response_code         = 404
-      error_caching_min_ttl = 60
-      response_page_path    = "/404.html"
-    }
-  ]
-  description = "The [CloudFront custom error responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GeneratingCustomErrorResponses.html)"
-  type = list(object({
-    error_code            = number
-    response_code         = number
-    error_caching_min_ttl = number
-    response_page_path    = string
-  }))
-}
-
 variable "cloudfront_default_root_object" {
   default     = null
   description = "The [CloudFront default root object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) to display (this is `null` by default, so nothing will display at `https://domain.com` unless you set something here)"

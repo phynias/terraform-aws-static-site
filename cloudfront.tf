@@ -27,17 +27,6 @@ resource "aws_cloudfront_distribution" "site" {
   http_version        = var.cloudfront_http_version
   is_ipv6_enabled     = var.cloudfront_ipv6
   price_class         = var.cloudfront_price_class
-
-  dynamic "custom_error_response" {
-    for_each = var.cloudfront_custom_error_responses
-    content {
-      error_code            = custom_error_response.value.error_code
-      response_code         = custom_error_response.value.response_code
-      error_caching_min_ttl = custom_error_response.value.error_caching_min_ttl
-      response_page_path    = custom_error_response.value.response_page_path
-    }
-  }
-
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
