@@ -177,5 +177,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_s3_bucket_id"></a> [s3\_bucket\_id](#output\_s3\_bucket\_id) | Value of aws\_s3\_bucket.site.id |
 | <a name="output_site_updating_iam_policy_arn"></a> [site\_updating\_iam\_policy\_arn](#output\_site\_updating\_iam\_policy\_arn) | Value of site\_updating IAM policy ARN |
 <!-- END_TF_DOCS -->
