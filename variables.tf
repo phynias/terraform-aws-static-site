@@ -120,3 +120,15 @@ variable "upload_dir" {
   description = "Upload the contents of this directory to S3"
   type        = string
 }
+
+variable "prune_old_files_days" {
+  default     = 30
+  description = "Number of days to keep files in the bucket before pruning"
+  type        = number
+}
+
+variable "move_files_to_IA_days" {
+  default     = 7
+  description = "Number of days to keep files in the bucket before moving to IA"
+  type        = number
+}
